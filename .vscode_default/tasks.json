@@ -9,6 +9,20 @@
             "command": "make",
             "options": {
                 "cwd": "${workspaceFolder}/hash_table_separate_chaining/"
+            }
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "clean"
+            ],
+            "dependsOn":[
+                "comp"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/hash_table_separate_chaining/"
             },
             "group": {
                 "kind": "build",

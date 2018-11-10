@@ -16,7 +16,7 @@
             "externalConsole": true,
             "MIMode": "gdb",
             "miDebuggerPath": "D:\\Program Files\\TDM-GCC-64\\gdb64\\bin\\gdb.exe",
-            "preLaunchTask": "comp",
+            "preLaunchTask": "clean",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",

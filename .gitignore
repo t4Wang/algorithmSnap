@@ -1,2 +1,7 @@
 algorithm.cbp
 algorithm.layout
+*.o
+*.exe
+*.gch
+/.vscode
+*.code-workspace
