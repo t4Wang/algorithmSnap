@@ -1,16 +1,15 @@
 /*************************************
  * 
  *   哈希表
- * 哈希表 分离链接法 实现
+ * 哈希表 开放定址法 线性寻址 实现
  * 
  ************************************/
 #ifndef HASH_H
 #define HASH_H
 
-typedef int ElementType;
-struct Node;
+typedef int Position;
+typedef const char* ElementType;  // 元素类型使用字符串
 struct HashTbl;
-typedef struct Node *Position;
 typedef struct HashTbl *HashTable;
 
 HashTable InitializeTable(int TableSize);
