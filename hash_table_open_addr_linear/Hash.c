@@ -87,7 +87,6 @@ HashTable InitializeTable(int TableSize)
     if (H->TheLists == NULL)
         FatalError("Out of space!!!");
 
-    int i;
     for (i = 0; i < H->TableSize; i++)
     {
         H->TheLists[i].Info = Empty;
@@ -111,7 +110,7 @@ Position Find(ElementType Key, HashTable H)
 
     // char*
     int collisionNum = 0;
-    while (H->TheLists[pos].Info != Empty && strcmp(H->TheLists[pos].Element, Key))
+    while (H->TheLists[pos].Info != Empty && strcmp(H->TheLists[pos].Element, Key) == 0)
     {
         pos += 2 * ++collisionNum - 1;
         if (pos >= H->TableSize)
