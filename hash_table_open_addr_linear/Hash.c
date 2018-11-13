@@ -62,6 +62,20 @@ int hash(ElementType Key, int TableSize)
     return hashVal % TableSize;
 }
 
+/**
+ * 再散列
+ */
+HashTable ReHash(HashTable oldTable) {
+    HashTable newTable = InitializeTable(oldTable->TableSize * 2);
+    int i;
+    for (i = 0; i < oldTable->TableSize; i++) {
+        if (oldTable->TheLists[i].Info == Legitimate)
+            Insert(oldTable->TheLists[i].Element, newTable);
+    }
+    free(oldTable);
+    return newTable;
+}
+
 HashTable InitializeTable(int TableSize)
 {
     HashTable H;
@@ -119,12 +133,16 @@ Position Find(ElementType Key, HashTable H)
     return pos;
 }
 
-void Insert(ElementType Key, HashTable H)
+HashTable Insert(ElementType Key, HashTable H)
 {
     Position pos = Find(Key, H);
     if (H->TheLists[pos].Info == Empty)
     {
         H->TheLists[pos].Element = Key;
         H->TheLists[pos].Info = Legitimate;
+    } else {
+        H = ReHash(H);
+        Insert(Key, H);
     }
+    return H;
 }
