@@ -4,7 +4,7 @@
 #include <math.h>
 
 const int MinHeapSize = 10;
-const ElementType MinData = 10;
+const ElementType MinData = 0;
 
 struct HeapStruct
 {
@@ -45,7 +45,6 @@ PriorityQueue InitializeTable(int MaxElements)
     int i;
 
     if (MaxElements < MinHeapSize)
-        ;
     {
         Error("Priority queue size too small");
         return NULL;
@@ -56,7 +55,7 @@ PriorityQueue InitializeTable(int MaxElements)
         FatalError("Out of space!!!");
 
     /* Allocate the array plus one extra for sentinel */
-    /* [0]用来存放最小的值，这样插入时判断是否到达[1]可以节省一些时间 */
+    /* [0]用来存放最小的值，这样插入时判断结束条件是否到达根节点[1]可以节省一些时间 */
     H->Elements = malloc(sizeof(ElementType) * (MaxElements + 1));
     if (H->Elements == NULL)
         FatalError("Out of space!!!");
@@ -117,7 +116,7 @@ void Insert(ElementType Key, PriorityQueue H)
         return;
     }
 
-    /* [0]小于所有的值，所以不用加 && curIndex != 1判断是否到达首端 */
+    /* [0]小于所有的值，所以不用加 && curIndex > 1判断是否到达首端 */
     for (curIndex = ++H->Size; H->Elements[curIndex / 2] > Key; curIndex /= 2)
         H->Elements[curIndex] = H->Elements[curIndex / 2];
 
@@ -155,6 +154,9 @@ ElementType DeleteMin(PriorityQueue H)
         H->Elements[i] = H->Elements[child];
         i = child;
     }
+    // 分情况
+    // 如果填充到最后一层，最后一个元素就是最后一次操作的节点，将这个元素补进（i和Size相等，在上一次循环就做了这个操作,所以什么也不用做)
+    // 如果填充到最后一层，最后一个元素不是子节点，将这个元素赋值给最后一个空位就可
     H->Elements[i] = H->Elements[H->Size];
     H->Size -= 1;
     return minEle;
