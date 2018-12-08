@@ -13,32 +13,6 @@ struct HeapStruct
     ElementType *Elements; // 哈希表存储的指向链表的数据数组
 };
 
-/**
- * 求下一个素数
- */
-int NextPrime(int N)
-{
-    if (N % 2 == 0)
-        ++N;
-    int i;
-    int notPrime = 0;
-    while (1)
-    {
-        int k = floor(sqrt(N) + 0.5); // 避免重复算sqrt,通过四舍五入避免浮点误差，1.9999，m=sqrt(m),"0.9999将直接被截掉 只剩1"
-        for (i = 2; i <= k; i++)
-        {
-            if (N % i == 0)
-            {
-                notPrime = 1;
-                break;
-            }
-        }
-        if (!notPrime)
-            return N;
-        N += 2;
-    }
-}
-
 PriorityQueue InitializeTable(int MaxElements)
 {
     PriorityQueue H;
